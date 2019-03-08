@@ -47,11 +47,11 @@ from mrcnn import model as modellib, utils
 # COCO_WEIGHTS_PATH = os.path.join(ROOT_DIR, "mask_rcnn_tree.h5")
 # COCO_WEIGHTS_PATH = os.path.join(ROOT_DIR, "logs/tree20190221T2228/mask_rcnn_tree_0030.h5")
 # COCO_WEIGHTS_PATH = os.path.join(ROOT_DIR, "logs/tree20190221T2228/mask_rcnn_tree_0030.h5")
-COCO_WEIGHTS_PATH = os.path.join(ROOT_DIR, "logs/tree20190302T1235/mask_rcnn_tree_0110.h5")
+COCO_WEIGHTS_PATH = "/content/drive/My Drive/tree_detection/models/mask_rcnn_coco.h5"
 
 # Directory to save logs and model checkpoints, if not provided
 # through the command line argument --logs
-DEFAULT_LOGS_DIR = os.path.join(ROOT_DIR, "logs")
+DEFAULT_LOGS_DIR = "/content/drive/My Drive/tree_detection/models/logs"
 
 ############################################################
 #  Configurations
@@ -134,7 +134,8 @@ class treeDataset(utils.Dataset):
             # load_mask() needs the image size to convert polygons to masks.
 
         file_names = next(os.walk(masks_dir))[2]
-        for mat_file in file_names:                
+        for mat_file in file_names:
+            print("mat_file")		
             mask_path = os.path.join(masks_dir, mat_file)
             im_file_name = mat_file[:-4]+'.jpg'
             image_path = os.path.join(dataset_dir, im_file_name)
@@ -219,7 +220,7 @@ def train(model):
 #    print("Training network heads")
     model.train(dataset_train, dataset_val,
                 learning_rate=config.LEARNING_RATE,
-                epochs=130,
+                epochs=10,
                 layers='heads')
 
 
